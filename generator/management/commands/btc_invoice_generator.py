@@ -130,7 +130,7 @@ class Command(BaseCommand):
                 #
 
                 for index in xrange(len(invoice_request.items.all())):
-                    latex_output += "\\expandafter\\newcommand\\csname item%s\\endcsname{%s}" % (str(index), str(invoice_request.items.all()[index])) + "\n"
+                    latex_output += "\\expandafter\\newcommand\\csname item%s\\endcsname{%s}" % (str(index), self.escape_latex(str(invoice_request.items.all()[index]))) + "\n"
 
                 #
                 # Generating the filenames.
