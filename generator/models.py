@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Invoice(models.Model):
     first_name = models.CharField(max_length=100)
@@ -6,7 +7,7 @@ class Invoice(models.Model):
     address = models.CharField(max_length=256, null=True)
     country = models.CharField(max_length=256, null=True)
     email = models.CharField(max_length=256, null=True)
-    date = models.DateField(auto_now_add=True, null=True)
+    date = models.DateField(auto_now_add=False, null=True)
     currency = models.CharField(max_length=256, null=True)
     closed = models.BooleanField(default=False)
     success = models.BooleanField(default=False)

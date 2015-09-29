@@ -3,13 +3,16 @@ from rest_framework import serializers
 from generator.models import Invoice, Item
 from pprint import pprint
 
+from datetime import date
+
 class ItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Item
-        fields = ('description', 'amount')
+	class Meta:
+		model = Item
+		fields = ('description', 'amount')
 
 class InvoiceSerializer(serializers.ModelSerializer):
 	id = serializers.IntegerField(read_only=True)
+	date = serializers.DateField(required=False, default=date.today())
 	items = ItemSerializer(many=True)
 
 	class Meta:
@@ -22,4 +25,5 @@ class InvoiceSerializer(serializers.ModelSerializer):
 
 		for item_data in items_data:
 			Item.objects.create(invoice=invoice, **item_data)
+
 		return invoice

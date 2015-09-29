@@ -157,9 +157,10 @@ class Command(BaseCommand):
                     #
                     # Generating the invoice in pdf.
                     #
+
                     current_dir = os.getcwd()
                     os.symlink(current_dir + "/" + template_file_name, temp_dir + "/" + tex_file_name)
-                    os.chdir(temp_dir)
+                    os.chdir(temp_dir) #we move to the temporary directory we made to generate the .pdf file there.
 
                     self.debug(3, "Generating invoice as %s" % pdf_file_name)
 
@@ -180,7 +181,7 @@ class Command(BaseCommand):
                     try:                
                         shutil.copy(temp_dir + "/" + pdf_file_name, "pdf_dump/" + pdf_file_name)
                     except (IOError, os.error):
-                        self.debug(4, "ERROR: Could not copy %s. The file was probably never made by pdflatex." % pdf_file_name)
+                        self.debug(4, "ERROR: Could not copy %s. The file was probably never made by xelatex." % pdf_file_name)
 
                 #
                 # Finally remove the temporary files.
@@ -196,7 +197,7 @@ class Command(BaseCommand):
                 invoice_request.closed = True #closing the request.
                 invoice_request.save()
 
-            time.sleep(0.150)
+            time.sleep(0.150) 
 
 
 
